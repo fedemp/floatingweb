@@ -4,13 +4,13 @@ function url() {
 
 async function action(page) {
   await page.evaluate(() => {
-    document.getElementById("toggle-floating-web-component").click();
+    document.getElementById("toggle-state-web-component").click();
   });
 }
 
 async function back(page) {
   await page.evaluate(() => {
-    document.getElementById("toggle-floating-web-component").click();
+    document.getElementById("toggle-state-web-component").click();
   });
 }
 

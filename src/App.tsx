@@ -1,15 +1,14 @@
-import { useFloating } from "@floating-ui/react-dom";
 import { useRef, useState } from "react";
 import { createRoot, Root } from "react-dom/client";
 
-// FloatingUI setReference
+// useState
 
-function MyFloatingReactComponent() {
-  const { refs } = useFloating();
-  return <input ref={refs.setReference} />;
+function MyStateReactComponent() {
+  const [ref, setRef] = useState<HTMLInputElement|null>();
+  return <input ref={setRef} />;
 }
 
-class MyFloatingWebComponent extends HTMLElement {
+class MyStateWebComponent extends HTMLElement {
   root: Root | null = null;
   connectedCallback() {
     const shadowRoot = this.attachShadow({ mode: "open" });
@@ -18,7 +17,7 @@ class MyFloatingWebComponent extends HTMLElement {
 
     shadowRoot.appendChild(mountPoint);
 
-    this.root.render(<MyFloatingReactComponent />);
+    this.root.render(<MyStateReactComponent />);
   }
 
   disconnectedCallback(): void {
@@ -26,11 +25,9 @@ class MyFloatingWebComponent extends HTMLElement {
   }
 }
 
-customElements.define("my-floating-web-component", MyFloatingWebComponent);
+customElements.define("my-state-web-component", MyStateWebComponent);
 
-// End FloatingUI setReference
-
-// React useRef
+// useRef
 
 function MyReactComponent() {
   const inputReference = useRef<HTMLInputElement | null>(null);
@@ -60,12 +57,11 @@ customElements.define("my-web-component", MyWebComponent);
 // End React useRef
 
 export default function App() {
-	// No FloatingUI
   const [isWebComponentVisible, setIsWebComponentVisible] = useState(false);
   const [isReactComponentVisible, setIsReactComponentVisible] = useState(false);
 
-  const [isFloatingWebVisible, setIsFloatingWebVisible] = useState(false);
-  const [isFloatingVisible, setIsFloatingVisible] = useState(false);
+  const [isStateWebVisible, setIsStateWebVisible] = useState(false);
+  const [isStateVisible, setIsStateVisible] = useState(false);
 
   return (
     <>
@@ -99,27 +95,27 @@ export default function App() {
 
       <button
         type="button"
-        id="toggle-floating-web-component"
-        onClick={() => setIsFloatingWebVisible((current) => !current)}
+        id="toggle-state-web-component"
+        onClick={() => setIsStateWebVisible((current) => !current)}
       >
-        Web component with FloatingUI
+        Web component with useState
       </button>
-      {isFloatingWebVisible ? (
+      {isStateWebVisible ? (
         <p>
-          <my-floating-web-component />
+          <my-state-web-component />
         </p>
       ) : null}
 
       <button
         type="button"
-        id="toggle-floating-react-component"
-        onClick={() => setIsFloatingVisible((current) => !current)}
+        id="toggle-state-react-component"
+        onClick={() => setIsStateVisible((current) => !current)}
       >
-        React component with FloatingUI
+        React component with useState
       </button>
-      {isFloatingVisible ? (
+      {isStateVisible ? (
         <p>
-          <MyFloatingReactComponent />
+          <MyStateReactComponent />
         </p>
       ) : null}
     </>

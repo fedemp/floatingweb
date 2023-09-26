@@ -10,7 +10,7 @@ async function action(page) {
     document.getElementById("toggle-react-component").click();
   });
   await page.evaluate(() => {
-    document.getElementById("toggle-floating-react-component").click();
+    document.getElementById("toggle-state-react-component").click();
   });
 }
 
@@ -22,7 +22,7 @@ async function back(page) {
     document.getElementById("toggle-react-component").click();
   });
   await page.evaluate(() => {
-    document.getElementById("toggle-floating-react-component").click();
+    document.getElementById("toggle-state-react-component").click();
   });
 }
 
